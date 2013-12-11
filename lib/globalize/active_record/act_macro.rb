@@ -11,8 +11,9 @@ module Globalize
 
         if attr_names.present?
           translation_class.instance_eval %{
-            attr_accessible :#{attr_names.join(', :')}
+            attr_accessible :#{(attr_names | [:locale]).join(', :')}
           }
+  
 
           attr_names.each do |attr_name|
             # Detect and apply serialization.
