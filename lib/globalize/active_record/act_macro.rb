@@ -69,17 +69,6 @@ module Globalize
 
         after_create :save_translations!
         after_update :save_translations!
-
-        if options[:versioning]
-          if options[:versioning].is_a?(Hash)
-            translation_class.versioned options[:versioning]
-          else
-            ::ActiveRecord::Base.extend(Globalize::Versioning::PaperTrail)
-
-            translation_class.has_paper_trail
-            delegate :version, :versions, :to => :translation
-          end
-        end
       end
 
       # In order to allow queries on translated attributes in associations, we have to
